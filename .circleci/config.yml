@@ -4,7 +4,6 @@ jobs:
     working_directory: ~/project
     docker:
       - image: circleci/openjdk:8-jdk
-      - image: circleci/android:api-30-node
     steps:
       - checkout
       - run:
@@ -16,17 +15,15 @@ jobs:
             sudo apt-get install -y openjdk-17-jdk
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
-            mkdir android-sdk-linux
-            cd android-sdk-linux
-            curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            unzip -q sdk.zip
-            rm sdk.zip
-            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
-            pwd
-            cd cmdline-tools/bin/sdkmanager
-            ls
-            pwd
+            sudo apt-get update && sudo apt-get install -y \
+              git \
+              wget \
+              unzip
+            wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+            unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
+            echo 'export ANDROID_SDK_ROOT=$HOME/android-sdk-linux' >> $BASH_ENV
+            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin' >> $BASH_ENV
+
       - run:
           name: Run single test
           command: |
