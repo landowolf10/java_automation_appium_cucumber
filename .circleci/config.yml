@@ -22,7 +22,7 @@ jobs:
             wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
             unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
             pwd
-            echo 'export ANDROID_SDK_ROOT=$HOME/android-sdk-linux' >> $BASH_ENV
+            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin' >> $BASH_ENV
 
       - run:
