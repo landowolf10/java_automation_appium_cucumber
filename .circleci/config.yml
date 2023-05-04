@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/project
     docker:
       - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-30-node
     steps:
       - checkout
       - run:
