@@ -21,3 +21,4 @@ jobs:
             chmod +x gradlew
             appium &
             sudo ./gradlew clean test
+            
