@@ -29,7 +29,7 @@ public class Clients {
         HashMap<String, String> runSettings = loadConfig();
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        //capabilities.setCapability("automationName", runSettings.get("automationName"));
+        capabilities.setCapability("automationName", runSettings.get("automationName"));
         capabilities.setCapability("platformName", runSettings.get("platformName"));
         capabilities.setCapability("deviceName", runSettings.get("deviceName"));
         capabilities.setCapability("appPackage", runSettings.get("appPackage"));
