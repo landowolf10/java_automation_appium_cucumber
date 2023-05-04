@@ -12,9 +12,6 @@ jobs:
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo npm install -g appium
-            sudo apt-get install -y wget
-            wget https://download.java.net/java/GA/jdk17.0.1/7147401fd7354114ac51ef3e1328291f/9/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz
-            sudo tar xzf openjdk-17.0.1_linux-x64_bin.tar.gz -C /opt
-            rm openjdk-17.0.1_linux-x64_bin.tar.gz
-            export JAVA_HOME=/opt/jdk-17.0.1
+            sudo apt-get install -y openjdk-17-jdk
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
