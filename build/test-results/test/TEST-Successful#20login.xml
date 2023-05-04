@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Successful login" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-04T18:14:27" hostname="DESKTOP-AM3C8N4" time="20.091">
+  <properties/>
+  <testcase name="Successful login" classname="Successful login" time="20.091"/>
+  <system-out><![CDATA[
+Scenario: Successful login                                    ?[90m# src/main/java/project/features/login/successful_login.feature:2?[0m
+  ?[32mGiven ?[0m?[32mapp is open?[0m                                           ?[90m# project.steps_definition.CommonSteps.validateAppOpen()?[0m
+
+    Embedding Screenshot [image/png 228370 bytes]
+
+  ?[32mWhen ?[0m?[32mentering email ?[0m?[32m?[1mstandard_user?[0m?[32m and password ?[0m?[32m?[1msecret_sauce?[0m ?[90m# project.steps_definition.LoginSteps.setUserCredentials(java.lang.String,java.lang.String)?[0m
+
+    Embedding Screenshot [image/png 155984 bytes]
+
+  ?[32mAnd ?[0m?[32mpress login button?[0m                                      ?[90m# project.steps_definition.LoginSteps.pressLoginButton()?[0m
+
+    Embedding Screenshot [image/png 160682 bytes]
+
+]]></system-out>
+  <system-err><![CDATA[SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+]]></system-err>
+</testsuite>
