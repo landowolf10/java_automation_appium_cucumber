@@ -20,7 +20,8 @@ jobs:
             curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
             unzip -q sdk.zip
             rm sdk.zip
-            pwd
+            echo 'export ANDROID_SDK_ROOT=$HOME/circleci/project/android-sdk-linux' >> $BASH_ENV
+            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin' >> $BASH_ENV
       - run:
           name: Run single test
           command: |
