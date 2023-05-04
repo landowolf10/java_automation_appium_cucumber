@@ -23,9 +23,10 @@ jobs:
             unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
             cd android-sdk-linux/cmdline-tools/bin
             echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
-            echo $ANDROID_SDK_ROOT
+            
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
+            echo Variable: $ANDROID_SDK_ROOT
 
       - run:
           name: Run single test
