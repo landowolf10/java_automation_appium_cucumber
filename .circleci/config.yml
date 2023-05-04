@@ -13,15 +13,14 @@ jobs:
             sudo apt-get install -y nodejs
             sudo npm install -g appium
             sudo apt-get install -y openjdk-17-jdk
-            mkdir -p ${ANDROID_HOME}
-            cd ${ANDROID_HOME}
-            curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-            unzip sdk.zip
-            rm sdk.zip
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
-            echo 'export ANDROID_HOME=$HOME/android-sdk-linux' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_HOME/tools/bin' >> $BASH_ENV
+            wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+            unzip -q sdk-tools-linux-4333796.zip -d $HOME/android-sdk
+            export ANDROID_HOME=$HOME/android-sdk
+            export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+            yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+            $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-30"
       - run:
           name: Run single test
           command: |
