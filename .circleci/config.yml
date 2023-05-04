@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: circleci/openjdk:17-jdk
+      - image: circleci/openjdk:17-buster-node-browsers-legacy
     steps:
       - checkout
       - run:
