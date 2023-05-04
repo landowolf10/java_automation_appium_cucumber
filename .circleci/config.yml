@@ -18,5 +18,6 @@ jobs:
       - run:
           name: Run single test
           command: |
+            chmod +x gradlew
             appium &
-            ./gradlew clean test
+            sudo ./gradlew clean test
