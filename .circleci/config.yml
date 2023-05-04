@@ -23,8 +23,8 @@ jobs:
             echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin' >> $BASH_ENV
             pwd
+            cd cmdline-tools
             ls
-            cd platform-tools
             pwd
             ls -la $ANDROID_SDK_ROOT/platform-tools
       - run:
