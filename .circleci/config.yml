@@ -34,5 +34,6 @@ jobs:
           command: |
             chmod +x gradlew
             appium &
+            source $BASH_ENV
             adb start-server
             sudo ./gradlew clean test
