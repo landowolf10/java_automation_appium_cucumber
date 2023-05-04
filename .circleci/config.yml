@@ -16,23 +16,17 @@ jobs:
             sudo apt-get install -y openjdk-17-jdk
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
-            sudo apt-get update && sudo apt-get install -y \
-              git \
-              wget \
-              unzip \
-              adb
-            wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-            unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
-            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
+            wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+            unzip sdk-tools-linux-4333796.zip -d android-sdk
+            echo 'export ANDROID_HOME=$HOME/project/android-sdk' >> $BASH_ENV
+            echo 'export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools' >> $BASH_ENV
             source $BASH_ENV
+            yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
 
       - run:
           name: Run single test
           command: |
             chmod +x gradlew
             appium &
-            source $BASH_ENV
-            adb start-server
             sudo ./gradlew clean test
