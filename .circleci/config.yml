@@ -16,6 +16,7 @@ jobs:
             sudo apt-get install -y openjdk-17-jdk
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
+            sudo apt-get install -y openjdk-8-jdk
             wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
             unzip sdk-tools-linux-4333796.zip -d android-sdk
             echo 'export ANDROID_HOME=$HOME/project/android-sdk' >> $BASH_ENV
