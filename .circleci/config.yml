@@ -16,3 +16,4 @@ jobs:
           name: Run single test
           command: |
             appium &
+            ./gradlew clean test
