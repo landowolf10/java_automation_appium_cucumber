@@ -28,6 +28,7 @@ jobs:
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
             echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
             source $BASH_ENV
+            which adb
 
       - run:
           name: Run single test
