@@ -41,12 +41,11 @@ jobs:
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
-            yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
-            ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "system-images;android-30;google_apis;x86_64"
       - run:
           name: Start Appium
           command: |
             appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
+            background: true
             ps aux | grep appium
       - run:
           name: Run tests
