@@ -45,8 +45,8 @@ jobs:
           name: Start Appium
           command: |
             appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
-            background: true
             ps aux | grep appium
+          background: true
       - run:
           name: Run tests
           command: |
