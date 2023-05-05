@@ -14,7 +14,6 @@ jobs:
             mkdir -p ~/Android/cmdline-tools
             unzip -q commandlinetools-linux-7302050_latest.zip -d ~/Android/cmdline-tools
             pwd
-            cd Android
             ls
             echo "y" | ~Android/cmdline-tools/tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
             echo 'export ANDROID_HOME=~/Android' >> $BASH_ENV
