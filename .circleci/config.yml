@@ -10,9 +10,9 @@ jobs:
       - run:
           name: Install Android SDK
           command: |
+            mkdir Android/cmdline-tools
+            cd Android/cmdline-tools
             wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            mkdir android-sdk-linux
-            cd android-sdk-linux
             unzip -q commandlinetools-linux-7302050_latest.zip -d ~/Android/cmdline-tools
             pwd
             ls
