@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@2.2.0
+  android: circleci/android@2.1.0
 
 jobs:
   build:
@@ -10,8 +10,7 @@ jobs:
       - image: circleci/android:api-30-node
     steps:
       - checkout
-      - android/install-android-sdk:
-          components: "platform-tools,build-tools;30.0.3,platforms;android-30"
+      - android/setup-android
       - run:
           name: Install npm and Appium
           command: |
