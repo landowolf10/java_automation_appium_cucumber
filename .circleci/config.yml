@@ -20,8 +20,10 @@ jobs:
       - run:
           name: Install npm and Appium
           command: |
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-            
+            sudo apt-get install -y nodejs
+            sudo npm install -g appium
       - run:
           name: Run single test
           command: |
