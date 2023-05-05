@@ -47,6 +47,15 @@ jobs:
             appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
             ps aux | grep appium
       - run:
+          name: Create Android Emulator
+          command: |
+            echo no | android-sdk-linux/tools/bin/avdmanager create avd -n emulator -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
+      - run:
+          name: Start Android Emulator
+          command: |
+            android-sdk-linux/emulator/emulator -avd emulator -no-window -no-audio -no-boot-anim -accel on -gpu off &
+            android-sdk-linux/platform-tools/adb wait-for-device
+      - run:
           name: Run tests
           command: |
             chmod +x gradlew
