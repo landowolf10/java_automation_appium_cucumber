@@ -14,6 +14,7 @@ jobs:
             name: Install Appium
             command: |
               npm install appium
+              appium -v
       - run:
           name: Set up Java 17
           command: |
@@ -39,7 +40,7 @@ jobs:
       - run:
           name: Start Appium
           command: |
-            appium &
+            appium --log-timestamp --port 4723 &
       - run:
           name: Check if Appium is running
           command: |
