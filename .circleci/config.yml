@@ -16,9 +16,7 @@ jobs:
             unzip -q commandlinetools-linux-7302050_latest.zip -d ~/android-sdk
             pwd
             ls
-            echo "y" | ~android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-            echo 'export ANDROID_HOME=~/Android' >> $BASH_ENV
-            echo 'export PATH=~/Android/cmdline-tools/tools/bin:$PATH' >> $BASH_ENV
+            
       - run:
           name: Install npm and Appium
           command: |
