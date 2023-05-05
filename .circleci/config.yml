@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Install Appium
           command: |
-            npm install appium
+            sudo npm install -g appium
       - run:
           name: Install Android SDK
           command: |
