@@ -25,11 +25,12 @@ jobs:
           name: Install Android SDK
           command: |
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export PATH=$PATH:$JAVA_HOME/bin
             wget -q https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O /tmp/tools.zip
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
-      
+
       - run:
           name: Run tests
           command: |
