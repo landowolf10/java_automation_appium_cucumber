@@ -10,13 +10,14 @@ jobs:
       - run:
           name: Install Android SDK
           command: |
-            mkdir android-sdk
-            cd android-sdk
-            wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            unzip -q commandlinetools-linux-7302050_latest.zip -d ~/android-sdk
+            mkdir android-sdk-linux
+            cd android-sdk-linux
+            curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+            unzip -q sdk.zip
+            rm sdk.zip
             pwd
             ls
-            
+
       - run:
           name: Install npm and Appium
           command: |
