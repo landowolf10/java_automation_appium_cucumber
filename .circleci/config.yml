@@ -13,13 +13,14 @@ jobs:
             mkdir android-sdk
             cd android-sdk
             wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            unzip -q commandlinetools-linux-7302050_latest.zip -d ~/android-sdk
+            unzip -q commandlinetools-linux-7302050_latest.zip
             pwd
             ls
       - run:
           name: Install Java 17
           command: |
             sudo apt-get update
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
             sudo apt-get install -y openjdk-17-jdk
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
