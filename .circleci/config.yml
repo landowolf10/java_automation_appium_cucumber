@@ -15,7 +15,6 @@ jobs:
             wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
             unzip -q commandlinetools-linux-7302050_latest.zip -d ~/android-sdk
             pwd
-            cd android-sdk
             ls
       - run:
           name: Install Java 17
