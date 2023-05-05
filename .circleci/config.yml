@@ -36,4 +36,4 @@ jobs:
           name: Run tests
           command: |
             chmod +x gradlew
-            appium &
+            appium --log-timestamp --port 4723 &
