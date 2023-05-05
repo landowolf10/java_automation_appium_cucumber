@@ -5,8 +5,6 @@ jobs:
       - image: circleci/android:api-30-node
     environment:
       JVM_OPTS: -Xmx3200m
-      ANDROID_HOME: /usr/local/android-sdk-linux
-      PATH: $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
     working_directory: ~/repo
     steps:
       - checkout
@@ -24,13 +22,16 @@ jobs:
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
       - run:
-          name: Install Android SDK
+          name: Install Android SDK packages
           command: |
-            mkdir "$ANDROID_HOME" .android \
-              && cd "$ANDROID_HOME" \
-              && curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip \
-              && unzip sdk.zip && rm sdk.zip \
-              && yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-30" "build-tools;30.0.3" "extras;android;m2repository" "extras;google;m2repository"
+            mkdir -p "${ANDROID_HOME}"
+            curl -L -o sdk-tools.zip https://dl.google.com/android/repository/sdk-tools-linux-7583922.zip
+            unzip -d "${ANDROID_HOME}" sdk-tools.zip
+            rm sdk-tools.zip
+            echo y | ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools"
+            echo y | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;30.0.3"
+            echo y | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-30"
+            echo y | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository"
       - run:
           name: Run tests
           command: |
