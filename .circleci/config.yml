@@ -16,7 +16,6 @@ jobs:
               npm install appium
               echo 'export PATH="$PATH:./node_modules/.bin"' >> $BASH_ENV
               source $BASH_ENV
-              appium -v
       - run:
           name: Set up Java 17
           command: |
@@ -43,6 +42,7 @@ jobs:
           name: Start Appium
           command: |
             appium --log-timestamp --port 4723 &
+            ps aux | grep appium
       - run:
           name: Check if Appium is running
           command: |
