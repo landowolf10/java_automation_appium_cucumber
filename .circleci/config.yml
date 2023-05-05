@@ -14,19 +14,18 @@ jobs:
             cd android-sdk
             wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
             unzip -q commandlinetools-linux-7302050_latest.zip
-            cd cmdline-tools
+            cd cmdline-tools/bin
             pwd
             ls
+            echo "y" | ~android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+            echo 'export ANDROID_HOME=~/Android' >> $BASH_ENV
+            echo 'export PATH=~/Android/cmdline-tools/tools/bin:$PATH' >> $BASH_ENV
       - run:
           name: Install Java 17
           command: |
             sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
-            wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
             sudo apt-get update
-            sudo apt-get install software-properties-common
-            sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-            sudo apt-get update
-            sudo apt-get install -y adoptopenjdk-17-hotspot
+            sudo apt-get install openjdk-17-jdk
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
 
