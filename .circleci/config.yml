@@ -1,39 +1,47 @@
 version: 2.1
-
 jobs:
   build:
-    working_directory: ~/project
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-30-node
+    environment:
+      JVM_OPTS: -Xmx3200m
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Install Appium
+          command: |
+            npm install -g appium
+            npm install wd
+            mkdir /tmp/appium_logs
+      - run:
+          name: Install Node.js 18.x
           command: |
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            sudo npm install -g appium
-            sudo apt-get install -y openjdk-17-jdk
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            export PATH=$JAVA_HOME/bin:$PATH
-            sudo apt-get update && sudo apt-get install -y \
-              git \
-              wget \
-              unzip \
-              adb
-            wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-            unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
-            pwd
-            ls
-            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
-            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
-            source $BASH_ENV
-            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
-
       - run:
-          name: Run single test
+          name: Install Android SDK 17
+          command: |
+            echo y | android update sdk --no-ui --all --filter "android-17"
+            echo y | android update sdk --no-ui --all --filter "build-tools-28.0.3"
+            echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
+            echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get install -y build-essential
+            sudo apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
+            npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      - run:
+          name: Run tests
           command: |
             chmod +x gradlew
             appium &
