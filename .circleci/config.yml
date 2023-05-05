@@ -1,38 +1,26 @@
 version: 2.1
 
+orbs:
+  android: circleci/android@1.1.3
+
 jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-30-node
     steps:
       - checkout
+      - android/setup-sdk:
+          components: "platform-tools,build-tools;30.0.3,platforms;android-30"
       - run:
           name: Install dependencies
           command: |
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo npm install -g appium
-            sudo apt-get install -y openjdk-17-jdk
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            export PATH=$JAVA_HOME/bin:$PATH
-            sudo apt-get update && sudo apt-get install -y \
-              git \
-              wget \
-              unzip \
-              adb
-            wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-            unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
-            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
-            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
-            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
-            source $BASH_ENV
-            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
-
       - run:
           name: Run single test
           command: |
             chmod +x gradlew
             appium &
-            sudo ./gradlew clean test
+            ./gradlew clean test
