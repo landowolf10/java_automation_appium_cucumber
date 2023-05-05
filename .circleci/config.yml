@@ -34,11 +34,6 @@ jobs:
             export ANDROID_AVD_HOME=$HOME/.android/avd
             export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
             export ANDROID_HOME=/usr/local/android-sdk-linux
-
-      - run:
-          name: Create Android emulator
-          command: |
-            echo "no" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
       - run:
           name: Install Android SDK
           command: |
@@ -48,10 +43,6 @@ jobs:
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
             yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
             ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "system-images;android-30;google_apis;x86_64"
-      - run:
-          name: Start Android emulator
-          command: |
-            ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
       - run:
           name: Start Appium
           command: |
