@@ -41,20 +41,21 @@ jobs:
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+            yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
+            ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "system-images;android-30;google_apis;x86_64"
+      - run:
+          name: Create Android emulator
+          command: |
+            echo "no" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
+            - run:
+                name: Start Android emulator
+                command: |
+                  ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
       - run:
           name: Start Appium
           command: |
             appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
             ps aux | grep appium
-      - run:
-          name: Create Android Emulator
-          command: |
-            echo no | android-sdk-linux/tools/bin/avdmanager create avd -n emulator -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
-      - run:
-          name: Start Android Emulator
-          command: |
-            android-sdk-linux/emulator/emulator -avd emulator -no-window -no-audio -no-boot-anim -accel on -gpu off &
-            android-sdk-linux/platform-tools/adb wait-for-device
       - run:
           name: Run tests
           command: |
