@@ -14,7 +14,9 @@ jobs:
           name: Set up Java 17
           command: |
             curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
-            sudo dpkg -i corretto.deb
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ./corretto.deb
+            sudo apt-get install -y -f
             rm corretto.deb
       - run:
           name: Set up JAVA_HOME
