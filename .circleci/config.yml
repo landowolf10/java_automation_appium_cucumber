@@ -30,7 +30,7 @@ jobs:
           command: |
             export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
             export PATH=$PATH:$JAVA_HOME/bin
-            export ANDROID_EMULATOR_IP_ADDRESS=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
+            export ANDROID_EMULATOR_IP_ADDRESS=10.0.2.2
             export ANDROID_AVD_HOME=$HOME/.android/avd
             export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
             export ANDROID_HOME=/usr/local/android-sdk-linux
