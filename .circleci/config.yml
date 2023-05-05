@@ -30,7 +30,10 @@ jobs:
           command: |
             export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
             export PATH=$PATH:$JAVA_HOME/bin
-            java -version
+            export ANDROID_EMULATOR_IP_ADDRESS=$(ip route | awk 'NR==1 {print $3}')
+            export ANDROID_AVD_HOME=$HOME/.android/avd
+            export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
+            export ANDROID_HOME=/usr/local/android-sdk-linux
       - run:
           name: Install Android SDK
           command: |
@@ -41,7 +44,7 @@ jobs:
       - run:
           name: Start Appium
           command: |
-            appium --log-timestamp --port 4723 &
+            appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
             ps aux | grep appium
       - run:
           name: Run tests
