@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-30-node
-      - image: centos:latest
+      - image: ubuntu:latest
     environment:
       JVM_OPTS: -Xmx3200m
     working_directory: ~/repo
@@ -13,9 +13,9 @@ jobs:
       - run:
           name: Set up Java 17
           command: |
-            curl -L -o corretto.rpm https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.rpm
-            sudo rpm -i corretto.rpm
-            rm corretto.rpm
+            curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
+            sudo dpkg -i corretto.deb
+            rm corretto.deb
       - run:
           name: Set up JAVA_HOME
           command: |
