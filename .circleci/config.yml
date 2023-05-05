@@ -14,6 +14,8 @@ jobs:
             name: Install Appium
             command: |
               npm install appium
+              echo 'export PATH="$PATH:./node_modules/.bin"' >> $BASH_ENV
+              source $BASH_ENV
               appium -v
       - run:
           name: Set up Java 17
@@ -55,4 +57,3 @@ jobs:
           name: Run tests
           command: |
             chmod +x gradlew
-            appium &
