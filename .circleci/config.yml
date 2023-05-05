@@ -11,6 +11,10 @@ jobs:
     steps:
       - checkout
       - run:
+            name: Install Appium
+            command: |
+              npm install appium
+      - run:
           name: Set up Java 17
           command: |
             sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
@@ -36,4 +40,4 @@ jobs:
           name: Run tests
           command: |
             chmod +x gradlew
-            appium --log-timestamp --port 4723 &
+            appium &
