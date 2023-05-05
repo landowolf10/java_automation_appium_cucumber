@@ -20,6 +20,7 @@ jobs:
       - run:
           name: Install Java 17
           command: |
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
             wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
             sudo apt-get update
             sudo apt-get install software-properties-common
