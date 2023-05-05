@@ -9,13 +9,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Appium
-          command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
-            curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            sudo npm install -g appium
-      - run:
           name: Install Node.js 18.x
           command: |
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -29,7 +22,10 @@ jobs:
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
-
+      - pre:
+          name: Install appium
+          command: |
+            npm install -g appium
       - run:
           name: Run tests
           command: |
