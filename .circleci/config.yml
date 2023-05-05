@@ -10,13 +10,13 @@ jobs:
       - run:
           name: Install Android SDK
           command: |
-            mkdir Android/cmdline-tools
-            cd Android/cmdline-tools
+            mkdir android-sdk-linux/cmdline-tools
+            cd android-sdk-linux/cmdline-tools
             wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
             unzip -q commandlinetools-linux-7302050_latest.zip -d ~/Android/cmdline-tools
             pwd
             ls
-            echo "y" | ~Android/cmdline-tools/tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+            echo "y" | ~android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
             echo 'export ANDROID_HOME=~/Android' >> $BASH_ENV
             echo 'export PATH=~/Android/cmdline-tools/tools/bin:$PATH' >> $BASH_ENV
       - run:
