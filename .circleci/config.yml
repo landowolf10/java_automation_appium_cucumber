@@ -18,8 +18,7 @@ jobs:
             pwd
             ls
             echo "y" | /home/circleci/project/android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-            echo 'export ANDROID_HOME=~/android-sdk' >> $BASH_ENV
-            echo 'export PATH=~/android-sdk/cmdline-tools/bin:$PATH' >> $BASH_ENV
+            
       - run:
           name: Install Java 17
           command: |
