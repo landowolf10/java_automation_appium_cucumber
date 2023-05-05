@@ -11,11 +11,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Appium
-          command: |
-            npm install appium
-            echo 'export PATH="$PATH:./node_modules/.bin"' >> $BASH_ENV
-            source $BASH_ENV
+            name: Install Appium
+            command: |
+              npm install appium
+              echo 'export PATH="$PATH:./node_modules/.bin"' >> $BASH_ENV
+              source $BASH_ENV
       - run:
           name: Set up Java 17
           command: |
@@ -26,7 +26,7 @@ jobs:
             sudo apt-get install -y -f
             rm corretto.deb
       - run:
-          name: Set up JAVA_HOME and Android Emulator
+          name: Set up JAVA_HOME
           command: |
             export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
             export PATH=$PATH:$JAVA_HOME/bin
@@ -34,10 +34,11 @@ jobs:
             export ANDROID_AVD_HOME=$HOME/.android/avd
             export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
             export ANDROID_HOME=/usr/local/android-sdk-linux
-            yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
-            ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "system-images;android-30;google_apis;x86_64"
+
+      - run:
+          name: Create Android emulator
+          command: |
             echo "no" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
-            ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
       - run:
           name: Install Android SDK
           command: |
@@ -45,17 +46,19 @@ jobs:
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+            yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
+            ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "system-images;android-30;google_apis;x86_64"
+      - run:
+          name: Start Android emulator
+          command: |
+            ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
       - run:
           name: Start Appium
           command: |
             appium --log-timestamp --port 4723 --default-capabilities '{"deviceName": "emulator-5554","platformName": "Android"}' &
             ps aux | grep appium
       - run:
-          name: Install app dependencies
-          command: |
-            chmod +x gradlew
-            sudo ./gradlew clean assembleDebug
-      - run:
           name: Run tests
           command: |
+            chmod +x gradlew
             sudo ./gradlew clean test
