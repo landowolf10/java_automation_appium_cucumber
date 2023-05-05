@@ -9,6 +9,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Appium
+          command: |
+            npm install -g appium
+      - run:
           name: Install Node.js 18.x
           command: |
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
