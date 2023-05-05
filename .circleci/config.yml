@@ -4,40 +4,35 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: circleci/android:api-30-node
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run:
-          name: Install Android SDK
+          name: Install dependencies
           command: |
-            mkdir android-sdk
-            cd android-sdk
-            wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            unzip -q commandlinetools-linux-7302050_latest.zip
-            cd cmdline-tools/bin
-            pwd
-            ls
-            echo "y" | /home/circleci/project/android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-            
-      - run:
-          name: Install Java 17
-          command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
-            sudo apt-get update
-            sudo apt-get install openjdk-17-jdk
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            export PATH=$JAVA_HOME/bin:$PATH
-
-      - run:
-          name: Install npm and Appium
-          command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo npm install -g appium
+            sudo apt-get install -y openjdk-17-jdk
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export PATH=$JAVA_HOME/bin:$PATH
+            sudo apt-get update && sudo apt-get install -y \
+              git \
+              wget \
+              unzip \
+              adb
+            wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+            unzip -d android-sdk-linux commandlinetools-linux-7583922_latest.zip
+            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
+            echo 'export ANDROID_SDK_ROOT=$HOME/project/android-sdk-linux' >> $BASH_ENV
+            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> $BASH_ENV
+            echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> $BASH_ENV
+            source $BASH_ENV
+            yes | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools"
+
       - run:
           name: Run single test
           command: |
             chmod +x gradlew
             appium &
-            ./gradlew clean test
+            sudo ./gradlew clean test
