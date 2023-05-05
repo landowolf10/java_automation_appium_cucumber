@@ -26,10 +26,6 @@ jobs:
             mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
             unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
             mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
-      - pre:
-          name: Install appium
-          command: |
-            npm install -g appium
       - run:
           name: Run tests
           command: |
