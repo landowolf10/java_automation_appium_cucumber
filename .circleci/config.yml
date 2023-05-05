@@ -20,9 +20,10 @@ jobs:
       - run:
           name: Install Java 17
           command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
+            wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+            sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
             sudo apt-get update
-            sudo apt-get install openjdk-17-jdk
+            sudo apt-get install -y adoptopenjdk-17-hotspot
             export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
             export PATH=$JAVA_HOME/bin:$PATH
 
