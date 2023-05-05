@@ -47,10 +47,10 @@ jobs:
           name: Create Android emulator
           command: |
             echo "no" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "Nexus 5X" --force
-            - run:
-                name: Start Android emulator
-                command: |
-                  ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
+      - run:
+          name: Start Android emulator
+          command: |
+            ${ANDROID_HOME}/emulator/emulator -avd test -noaudio -no-window -gpu off -no-boot-anim -no-snapshot &
       - run:
           name: Start Appium
           command: |
