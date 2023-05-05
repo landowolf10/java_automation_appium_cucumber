@@ -41,12 +41,12 @@ jobs:
       - run:
           name: Start Appium
           command: |
-            appium --log-timestamp --port 4723
+            appium --log-timestamp --port 4723 &
             ps aux | grep appium
       - run:
           name: Check if Appium is running
           command: |
-            response=$(curl -sSL http://localhost:4723/wd/hub/status)
+            response=$(curl -sSL http://0.0.0.0:4723/wd/hub/status)
             if [[ "$response" != *"\"status\":0"* ]]; then
               echo "Appium is not running"
               exit 1
@@ -57,3 +57,4 @@ jobs:
           name: Run tests
           command: |
             chmod +x gradlew
+            sudo ./gradlew clean test
