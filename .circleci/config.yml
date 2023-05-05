@@ -10,11 +10,10 @@ jobs:
       - run:
           name: Install Android SDK
           command: |
-            mkdir android-sdk-linux
-            cd android-sdk-linux
-            curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-            unzip -q sdk.zip
-            rm sdk.zip
+            mkdir android-sdk
+            cd android-sdk
+            wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+            unzip -q commandlinetools-linux-7302050_latest.zip -d ~/android-sdk
             pwd
             ls
 
@@ -23,7 +22,7 @@ jobs:
           command: |
             curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            npm install -g appium
+            sudo npm install -g appium
       - run:
           name: Run single test
           command: |
