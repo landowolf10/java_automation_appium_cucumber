@@ -9,13 +9,6 @@ jobs:
     steps:
       - checkout
 
-      # Install dependencies
-      - run:
-          name: Install dependencies
-          command:
-            chmod +x gradlew
-            ./gradlew assembleDebug
-
       # Run Appium tests
       - run:
           name: Run Appium tests
