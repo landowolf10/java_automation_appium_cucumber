@@ -3,18 +3,15 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-30-node
-      - image: ubuntu:latest
+
     environment:
       - BROWSERSTACK_USERNAME: orlandoavila_ve9kqN
       - BROWSERSTACK_ACCESS_KEY: LPbotyHHmZWvyWnkxnPH
-      - JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - run:
           name: Set up Java 17
           command:
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys
-            B53DC80D13EDEF05
             curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
             sudo apt-get update
             sudo apt-get install -y --no-install-recommends ./corretto.deb
