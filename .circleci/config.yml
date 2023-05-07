@@ -12,7 +12,9 @@ jobs:
       # Install dependencies
       - run:
           name: Install dependencies
-          command: ./gradlew assembleDebug
+          command:
+            chmod +x gradlew
+            ./gradlew assembleDebug
 
       # Run Appium tests
       - run:
