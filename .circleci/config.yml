@@ -2,8 +2,9 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: amazoncorretto:latest
+      - image: circleci/android:api-30-node
       - image: ubuntu:latest
+      - image: amazoncorretto:latest
     environment:
       - BROWSERSTACK_USERNAME: orlandoavila_ve9kqN
       - BROWSERSTACK_ACCESS_KEY: LPbotyHHmZWvyWnkxnPH
