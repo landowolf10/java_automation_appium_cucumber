@@ -8,7 +8,25 @@ jobs:
       - BROWSERSTACK_ACCESS_KEY: LPbotyHHmZWvyWnkxnPH
     steps:
       - checkout
-
+      - run:
+          name: Set up Java 17
+          command: >
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys
+            B53DC80D13EDEF05
+            curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends ./corretto.deb
+            sudo apt-get install -y -f
+            rm corretto.deb
+      - run:
+          name: Set up JAVA_HOME
+          command: |
+            export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
+            export PATH=$PATH:$JAVA_HOME/bin
+            export ANDROID_EMULATOR_IP_ADDRESS=10.0.2.2
+            export ANDROID_AVD_HOME=$HOME/.android/avd
+            export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
+            export ANDROID_HOME=/usr/local/android-sdk-linux
       # Run Appium tests
       - run:
           name: Run Appium tests
