@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-30-node
+      - image: ubuntu:latest
     environment:
       - BROWSERSTACK_USERNAME: orlandoavila_ve9kqN
       - BROWSERSTACK_ACCESS_KEY: LPbotyHHmZWvyWnkxnPH
