@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: Set up Java 17
-          command: >
+          command:
             sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys
             B53DC80D13EDEF05
             curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
