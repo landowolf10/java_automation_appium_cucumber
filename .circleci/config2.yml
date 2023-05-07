@@ -1,0 +1,67 @@
+---
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-30-node
+      - image: ubuntu:latest
+    environment:
+      JVM_OPTS: -Xmx3200m
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install Appium
+          command: |
+            npm install appium
+            echo 'export PATH="$PATH:./node_modules/.bin"' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Set up Java 17
+          command: >
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys
+            B53DC80D13EDEF05
+
+            curl -L -o corretto.deb https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
+
+            sudo apt-get update
+
+            sudo apt-get install -y --no-install-recommends ./corretto.deb
+
+            sudo apt-get install -y -f
+
+            rm corretto.deb
+      - run:
+          name: Set up JAVA_HOME
+          command: |
+            export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
+            export PATH=$PATH:$JAVA_HOME/bin
+            export ANDROID_EMULATOR_IP_ADDRESS=10.0.2.2
+            export ANDROID_AVD_HOME=$HOME/.android/avd
+            export ANDROID_SDK_ROOT=/usr/local/android-sdk-linux
+            export ANDROID_HOME=/usr/local/android-sdk-linux
+      - run:
+          name: Install Android SDK
+          command: >
+            wget -q
+            https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
+            -O /tmp/tools.zip
+
+            mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+
+            unzip -q /tmp/tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+
+            mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+      - run:
+          name: Start Appium
+          command: >
+            appium --log-timestamp --port 4723 --default-capabilities
+            '{"deviceName": "emulator-5554","platformName": "Android"}' &
+
+            ps aux | grep appium
+          background: true
+      - run:
+          name: Run tests
+          command: |
+            chmod +x gradlew
+            sudo ./gradlew clean test

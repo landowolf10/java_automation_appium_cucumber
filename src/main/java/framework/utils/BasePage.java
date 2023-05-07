@@ -5,6 +5,7 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,13 +14,13 @@ import java.time.Duration;
 import java.util.List;
 
 public class BasePage extends Clients {
-    static AppiumDriver driver;
+    static RemoteWebDriver driver;
 
     public BasePage() {
         driver = getDriver();
     }
 
-    public static AppiumDriver getMobileDriver() {
+    public static RemoteWebDriver getMobileDriver() {
         return driver;
     }
 

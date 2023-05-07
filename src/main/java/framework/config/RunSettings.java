@@ -10,9 +10,11 @@ public class RunSettings {
 
         settings.put("automationName", automationName);
         settings.put("platformName", platformName);
+        settings.put("platformVersion", platformVersion);
         settings.put("deviceName", deviceName);
         settings.put("appPackage", appPackage);
         settings.put("appActivity", appActivity);
+        settings.put("app", app);
 
         return settings;
     }
