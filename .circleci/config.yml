@@ -13,6 +13,7 @@ jobs:
       - run:
           name: Run Appium tests
           command: |
+            chmod +x gradlew
             ./gradlew clean test
 
 workflows:
