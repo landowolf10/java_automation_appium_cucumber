@@ -9,23 +9,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set up Java 17
-          command: |
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
-            sudo apt-get update
-            sudo apt-get install -y curl
-            curl -sL https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.tar.gz | tar xz
-            export JAVA_HOME=$PWD/amazon-corretto-17
-            export PATH=$JAVA_HOME/bin:$PATH
-            echo $JAVA_HOME
-            java -version
-      - run:
-          name: Set up JAVA_HOME
-          command: |
-            export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-            echo $JAVA_HOME
-      # Run Appium tests
-      - run:
           name: Run Appium tests
           command: |
             chmod +x gradlew
