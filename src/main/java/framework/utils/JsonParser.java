@@ -14,17 +14,19 @@ public class JsonParser
     {
         JSONParser jsonParser = new JSONParser();
         JSONObject user;
-        int userIndex = switch (userType.toLowerCase()) {
-            case "agronomist" -> 0;
-            case "sales rep" -> 1;
-            case "seller" -> 2;
-            case "grower" -> 3;
-            case "grower 2" -> 4;
-            case "fsm" -> 5;
-            case "dm" -> 6;
-            case "sales rep kurt" -> 7;
-            case "invalid user" -> 8;
-            default -> -9;
+        int userIndex;
+
+        switch (userType.toLowerCase()) {
+            case "agronomist": userIndex = 0; break;
+            case "sales rep": userIndex = 1; break;
+            case "seller": userIndex = 2; break;
+            case "grower": userIndex = 3; break;
+            case "grower 2": userIndex = 4; break;
+            case "fsm": userIndex = 5; break;
+            case "dm": userIndex = 6; break;
+            case "sales rep kurt": userIndex = 7; break;
+            case "invalid user": userIndex = 8; break;
+            default: userIndex = -9; break;
         };
 
         Object obj;
@@ -47,8 +49,10 @@ public class JsonParser
         int growerIndex = -1;
 
         switch (userType) {
-            case "Sales Rep" -> user = "sellers";
-            case "Seller", "Agronomist" -> user = "growers";
+            case "Sales Rep": user = "sellers"; break;
+            case "Seller":
+            case "Agronomist":
+                user = "growers"; break;
         }
 
         JSONArray jsonArray = (JSONArray) JsonParser.getJsonData(userType).get(user);
