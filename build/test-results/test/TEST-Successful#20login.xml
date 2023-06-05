@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Successful login" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-07T06:16:53" hostname="DESKTOP-AM3C8N4" time="38.686">
+<testsuite name="Successful login" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-04T05:21:32" hostname="LANDO" time="22.268">
   <properties/>
-  <testcase name="Successful login" classname="Successful login" time="38.686"/>
+  <testcase name="Successful login" classname="Successful login" time="22.268"/>
   <system-out><![CDATA[
 Scenario: Successful login                                    ?[90m# src/main/java/project/features/login/successful_login.feature:2?[0m
   ?[32mGiven ?[0m?[32mapp is open?[0m                                           ?[90m# project.steps_definition.CommonSteps.validateAppOpen()?[0m
 
-    Embedding Screenshot [image/png 177709 bytes]
+    Embedding Screenshot [image/png 165771 bytes]
 
   ?[32mWhen ?[0m?[32mentering email ?[0m?[32m?[1mstandard_user?[0m?[32m and password ?[0m?[32m?[1msecret_sauce?[0m ?[90m# project.steps_definition.LoginSteps.setUserCredentials(java.lang.String,java.lang.String)?[0m
 
-    Embedding Screenshot [image/png 136169 bytes]
+    Embedding Screenshot [image/png 122192 bytes]
 
   ?[32mAnd ?[0m?[32mpress login button?[0m                                      ?[90m# project.steps_definition.LoginSteps.pressLoginButton()?[0m
 
-    Embedding Screenshot [image/png 140593 bytes]
+    Embedding Screenshot [image/png 127345 bytes]
 
 ]]></system-out>
   <system-err><![CDATA[SLF4J: No SLF4J providers were found.

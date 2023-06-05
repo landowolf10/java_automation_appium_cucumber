@@ -35,19 +35,21 @@ public class Clients {
         String accessKey = "LPbotyHHmZWvyWnkxnPH";
 
         //Local
-        /*capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, runSettings.get("platformName"));
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, runSettings.get("platformVersion"));
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, runSettings.get("deviceName"));
-        capabilities.setCapability("app", runSettings.get("app"));*/
+        capabilities.setCapability("automationName", runSettings.get("automationName"));
+        capabilities.setCapability("platformName", runSettings.get("platformName"));
+        capabilities.setCapability("deviceName", runSettings.get("deviceName"));
+        capabilities.setCapability("appPackage", runSettings.get("appPackage"));
+        capabilities.setCapability("appActivity", runSettings.get("appActivity"));
+        capabilities.setCapability("autoGrantPermissions", true);
 
         //BrowserStack
-        options.setCapability("appium:app", runSettings.get("app"));
+        /*options.setCapability("appium:app", runSettings.get("app"));
         options.setCapability("appium:deviceName", "Samsung Galaxy S22 Ultra");
-        options.setCapability("appium:platformVersion", "12.0");
+        options.setCapability("appium:platformVersion", "12.0");*/
 
         try {
-            //driver = new AppiumDriver(new URL("http://hub.browserstack.com/wd/hub"), capabilities);
-            driver = new AppiumDriver(new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", userName , accessKey)), options);
+            driver = new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            //driver = new AppiumDriver(new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", userName , accessKey)), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
