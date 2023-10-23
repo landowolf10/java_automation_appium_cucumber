@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cucumber Test Suite" parallel="tests" thread-count="2">
+    <test name="Login Test on Android">
+        <parameter name="deviceName" value="Samsung Galaxy S21"/>
+        <parameter name="platformVersion" value="11.0"/>
+        <classes>
+            <class name="runners.LoginRunner"/>
+        </classes>
+    </test>
+    <!-- Add more test instances for other devices if needed -->
+</suite>

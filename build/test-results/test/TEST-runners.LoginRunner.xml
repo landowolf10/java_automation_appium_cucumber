@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="runners.LoginRunner" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-10-23T19:06:35" hostname="LANDO" time="43.762">
+  <properties/>
+  <testcase name="runScenario[0](&quot;As a valid user, I want to validate that I can log in successfully&quot;, &quot;Successful login&quot;)" classname="runners.LoginRunner" time="43.762"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+]]></system-err>
+</testsuite>
